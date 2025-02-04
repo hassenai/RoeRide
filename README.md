@@ -1,7 +1,5 @@
 # RoeRide
 
-# RoeRide
-
 ## Project Description
 RoeRide is a ride-sharing platform designed to facilitate transportation among students of Roehampton University. The goal is to provide an affordable, sustainable, and convenient way for students to commute to and from campus. By connecting users traveling in the same direction, RoeRide helps students save money, reduce traffic congestion, and lower their carbon footprint.
 
