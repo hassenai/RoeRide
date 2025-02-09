@@ -1,70 +1,58 @@
-# RoeRide
+# MySQL, PHPMyAdmin and Node.js (ready for Express development)
 
-## Project Description
-RoeRide is a ride-sharing platform designed to facilitate transportation among students of Roehampton University. The goal is to provide an affordable, sustainable, and convenient way for students to commute to and from campus. By connecting users traveling in the same direction, RoeRide helps students save money, reduce traffic congestion, and lower their carbon footprint.
+This will install Mysql and phpmyadmin (including all dependencies to run Phpmyadmin) AND node.js
 
-### Features
-- **Real-time ride matching** – Connect with students heading in the same direction.
-- **Secure in-app payments** – Easily split ride costs with fellow passengers.
-- **User ratings and reviews** – Ensure a safe and trustworthy experience.
-- **Easy-to-use interface** – A seamless user experience for all students.
+This receipe is for development - Node.js is run in using supervisor: changes to any file in the app will trigger a rebuild automatically.
 
-## Code of Conduct
-To maintain a respectful and collaborative environment, all members agree to:
-1. **Respectful Communication** – Maintain professionalism and resolve conflicts constructively.
-2. **Clear Task Ownership** – Assign specific tasks with deadlines to team members.
-3. **Supportive Environment** – Help team members facing challenges and ask for help when needed.
-4. **Decision-Making Process** – Decisions are made collectively, with the Scrum Master having the final say if necessary.
-5. **Equal Contribution** – Every member contributes fairly to the project.
-6. **Punctuality and Attendance** – Attend meetings on time and stay engaged.
+For security, this receipe uses a .env file for credentials.  A sample is provided in the env-sample file. If using these files for a fresh project, copy the env-sample file to a file called .env.  Do NOT commit the changed .env file into your new project for security reasons (in the node package its included in .gitignore so you can't anyway)
 
-## Personas
-### 1. Sarah – The Busy Student
-- **Age:** 21
-- **Needs:** Affordable, reliable transportation to campus.
-- **Challenges:** Unpredictable class schedules, crowded public transport.
-- **How RoeRide Helps:** Provides flexible ride-sharing options to match her schedule.
+In node.js, we use the MySQl2 packages (to avoid problems with MySQL8) and the dotenv package to read the environment variables.
 
-### 2. Ahmed – The Environmentally Conscious Commuter
-- **Age:** 25
-- **Needs:** Reduce carbon footprint and avoid parking issues.
-- **Challenges:** Expensive and limited parking, environmental concerns.
-- **How RoeRide Helps:** Enables carpooling, reducing emissions and travel costs.
+Local files are mounted into the container using the 'volumes' directive in the docker-compose.yml for ease of development.
 
-## Ethical Considerations
-1. **Privacy Protection** – User data (location, contact, payment info) is secured per GDPR standards.
-2. **User Safety** – Verified profiles, in-app messaging, and user ratings enhance safety.
-3. **Data Security** – Strong encryption and secure authentication prevent data breaches.
-4. **Misuse Prevention** – Reporting system and guidelines ensure responsible platform use.
+### Super-quickstart your new project:
 
-## Installation
-To run RoeRide locally:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/roeride.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd roeride
-   ```
-3. Install dependencies:
-   ```bash
-   npm install  # If using Node.js
-   ```
-4. Run the application:
-   ```bash
-   npm start
-   ```
+* Make sure that you don't have any other containers running usind docker ps
+* run ```docker-compose up --build```
 
-## Contribution Guidelines
-- Fork the repository and create a new branch.
-- Commit changes with clear messages.
-- Submit a pull request for review.
-- Follow the established code style and best practices.
+#### Visit phphmyadmin at:
 
-## License
-This project is licensed under the Apache License.
+http://localhost:8081/
 
-## Contact
-For any inquiries or contributions, feel free to reach out to the RoeRide team.
+#### Visit your express app at:
 
+http://localhost:3000
+
+For reference, see the video at: https://roehampton.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6f290a6b-ba94-4729-9632-adcf00ac336e
+
+NB if you are running this on your own computer rather than the azure labs that has been set up for you, you will need to install the following:
+
+* node.js  (windows: https://nodejs.org/en/download/)
+* docker desktop (for windows, this will also prompt you to install linux subsystem for windows https://docs.docker.com/desktop/windows/install/ )
+
+### Whats provided in these scaffolding files?
+
+
+  * A docker setup which will provide you with node.js, mysql and phpmyadmin, including the configuration needed so that both node.js AND phpmyadmin can 'see' and connect to your mysql database.  If you don't use docker you'll have to set up and connect each of these components separately.
+  * A basic starting file structure for a node.js app.
+  * A package.json file that will pull in the node.js libraries required and start your app as needed.
+  * A db.js file which provides all the code needed to connect to the mysql database, using the credentials in the .env file, and which provides a query() function that can send queries to the database and receive a result.  In order to use this (ie. interact with the database, you simply need to include this file in any file you create that needs this database interaction) with the following code:
+
+```const db = require('./services/db');
+```
+
+____
+
+Useful commands:
+
+Get a shell in any of the containers
+
+```bash
+docker exec -it <container name> bash -l
+```
+
+Once in the database container, you can get a MySQL CLI in the usual way
+
+```bash
+mysql -uroot -p<password> 
+```
