@@ -63,7 +63,7 @@ To run RoeRide locally:
 - Follow the established code style and best practices.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the apache-2.0 License.
 
 ## Contact
 For any inquiries or contributions, feel free to reach out to the RoeRide team.
