@@ -25,6 +25,47 @@ app.get("/db_test", function(req, res) {
     });
 });
 
+app.get("/students", async function(req, res) {
+    try {
+        const students = await db.query("SELECT * FROM Students");
+        res.json(students); // Send the students as JSON response
+    } catch (error) {
+        console.error("Database query failed:", error); // Log the error
+        res.status(500).send("Error fetching students data.");
+    }
+});
+
+// Add route for displaying students in an HTML table
+app.get("/students", async function(req, res) {
+    try {
+        const students = await db.query("SELECT * FROM Students");
+        let html = `
+            <h1>List of Students</h1>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+        
+        students.forEach(student => {
+            html += `
+                <tr>
+                    <td>${student.id}</td>
+                    <td><a href="/students/${student.id}">${student.name}</a></td>
+                </tr>`;
+        });
+        
+        html += `</tbody></table>`;
+        res.send(html); // Send the HTML table
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error fetching students data.");
+    }
+});
+
 // Create a route for /goodbye
 // Responds to a 'GET' request
 app.get("/goodbye", function(req, res) {
