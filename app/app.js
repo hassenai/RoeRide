@@ -21,8 +21,7 @@ app.get("/", function(req, res) {
 
 // Create a route for testing the db
 app.get("/db_test", function(req, res) {
-    // Assumes a table called test_table exists in your database
-    sql = 'select * from test_table';
+    sql = 'SELECT * FROM test_table';
     db.query(sql).then(results => {
         console.log(results);
         res.send(results);
@@ -33,10 +32,21 @@ app.get("/db_test", function(req, res) {
 app.get("/students", async function(req, res) {
     try {
         const students = await db.query("SELECT * FROM Students");
-        res.json(students); // Send the students as JSON response
+        res.json(students);
     } catch (error) {
         console.error("Database query failed:", error);
         res.status(500).send("Error fetching students data.");
+    }
+});
+
+// Task: Render the rides page using Pug (UPDATED)
+app.get("/rides", async function (req, res) {
+    try {
+        const rides = await db.query("SELECT * FROM uni_rides");
+        res.render("index", { rides }); // Send rides data to Pug template
+    } catch (error) {
+        console.error("Database query failed:", error);
+        res.status(500).send("Error fetching rides data.");
     }
 });
 
@@ -45,7 +55,7 @@ app.get("/goodbye", function(req, res) {
     res.send("Goodbye world!");
 });
 
-// Create a dynamic route for /hello/<name>, where name is any value provided by user
+// Create a dynamic route for /hello/<name>
 app.get("/hello/:name", function(req, res) {
     console.log(req.params);
     res.send("Hello " + req.params.name);
@@ -55,4 +65,3 @@ app.get("/hello/:name", function(req, res) {
 app.listen(3000, function(){
     console.log(`Server running at http://127.0.0.1:3000/`);
 });
-

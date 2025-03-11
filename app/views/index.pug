@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    h1 University Rides
+
+    table(border="1")
+        thead
+            tr
+                th Ride ID
+                th Driver Name
+                th Available Seats
+                th Pickup Location
+                th Drop-off Location
+                th Departure Time
+        tbody
+            each ride in rides
+                tr
+                    td= ride.ride_id
+                    td
+                        a(href=`/driver/${ride.driver_id}`) #{ride.driver_name}
+                    td= ride.available_seats
+                    td= ride.pickup_location
+                    td= ride.dropoff_location
+                    td= ride.departure_time
