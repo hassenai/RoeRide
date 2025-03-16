@@ -5,7 +5,6 @@ RoeRide is a ride-sharing platform designed to facilitate transportation among s
 
 ### Features
 - **Real-time ride matching** – Connect with students heading in the same direction.
-- **Secure in-app payments** – Easily split ride costs with fellow passengers.
 - **User ratings and reviews** – Ensure a safe and trustworthy experience.
 - **Easy-to-use interface** – A seamless user experience for all students.
 
