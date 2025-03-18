@@ -2,10 +2,221 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test HTML File</title>
+    
+    <title>RoeRide | Ride-Sharing for Roehampton University Students</title>
+    
+    <meta name="description" content="RoeRide - A ride-sharing platform for Roehampton University students, providing affordable and sustainable transportation." />
+    <meta name="keywords" content="RoeRide, ride-sharing, Roehampton University, student transportation, sustainable travel, carpooling, student commute">
+    
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="RoeRide | Ride-Sharing for Roehampton University Students">
+    <meta property="og:site_name" content="RoeRide">
+    <meta property="og:url" content="https://roeride.org">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="RoeRide - A ride-sharing platform for Roehampton University students, providing affordable and sustainable transportation.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/logo-icon.png" type="image/x-png">
 </head>
-<body>
-    <h1>Test HTML file</h1>
+
+<body oncontextmenu="return false">
+
+<!-- navbar starts -->
+<header>
+    <div>
+        <img src="images/roeride.png" alt="RoeRide Logo" class="logo-img">
+    </div>
+    <nav class="navbar">
+        
+        <ul>
+            <li><a class="active" href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        
+    </nav>
+</header>
+<!-- navbar ends -->
+
+<!-- Home section starts -->
+<section class="home" id="home">
+    <div id="particles-js"></div>
+    <div class="content">
+        <h2>Unlock Your Commute with <span class="highlight"><u>RoeRide</u></span></h2>
+        <p><br>Seamlessly connecting Roehampton University students for affordable and sustainable travel.</p>
+        <a href="#about" class="btn"><span>Discover More</span>
+            <i class="fas fa-arrow-circle-down"></i>
+        </a>
+    </div>
+
+    <!-- Ride Preview Section -->
+    <div class="ride-preview">
+        <img src="assets/images/ride-preview.webp" alt="A Ride Preview">
+        
+        <!-- Button to open the Ride link -->
+        <div class="button-container">
+            <a href="rides.html" class="btn">View Available Rides</a>
+        </div>
+    </div>
+
+</section>
+
+<!-- Home section ends -->
+
+<!-- about section starts -->
+<section class="about" id="about">
+    <h2 class="heading"><i class="fas fa-info-circle"></i> About <span>RoeRide</span></h2>
+    <div class="row">
+        <div class="image">
+            <img draggable="false" class="tilt" src="images/students-commute.webp" alt="">
+        </div>
+        <div class="content">
+            <h3>About RoeRide</h3>
+            <p>RoeRide is a ride-sharing platform designed to facilitate transportation among students of Roehampton University. Our goal is to provide an affordable, sustainable, and convenient way for students to commute to and from campus. By connecting users traveling in the same direction, RoeRide helps students save money, reduce traffic congestion, and lower their carbon footprint.
+
+                <br><br>We understand that commuting can be a hassle, especially for students. That's why we offer a seamless experience from finding a ride to reaching your destination. Our platform ensures safety and reliability with user ratings and reviews, making your journey stress-free.
+
+                <br><br>Join us in making commuting easier, cheaper, and greener for everyone at Roehampton University.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- about section ends -->
+
+<!-- Features section starts -->
+<section class="features" id="features">
+    <h2 class="heading"><i class="fas fa-concierge-bell"></i> Our <span>Features</span></h2>
+    <div class="container">
+        <div class="box">
+            <h3>User Ratings and Reviews</h3>
+            <p>Ensure a safe and trustworthy experience with our user rating and review system.</p>
+        </div>
+        <div class="box">
+            <h3>Easy-to-Use Interface</h3>
+            <p>Our platform offers a seamless user experience for all students.</p>
+        </div>
+        <div class="box">
+            <h3>Available Rides</h3>
+            <p>Find a list of available rides and students to pick up with ease.</p>
+        </div>
+    </div>
+    <div class="cta">
+        <a href="https://wa.me/roeride" class="btn">Contact Us</a>
+    </div>
+</section>
+<!-- Features section ends -->
+
+
+<!-- Reviews section starts -->
+<section class="reviews" id="reviews">
+    <h1 class="heading"><i class="fas fa-graduation-cap"></i> Student <span>Reviews</span></h1>
+    <div class="container">
+        <div class="student-box">
+            <i class="fas fa-user-graduate icon"></i>
+            <h3>Ahmed Ali</h3>
+            <p class="country">UK</p>
+            <p class="testimonial">RoeRide made my daily commute to campus so much easier and affordable. Highly recommend it to all students!</p>
+        </div>
+        <div class="student-box">
+            <i class="fas fa-user-graduate icon"></i>
+            <h3>Sara Ahmed</h3>
+            <p class="country">UK</p>
+            <p class="testimonial">I love how convenient and eco-friendly RoeRide is. It's a great way to meet new people too!</p>
+        </div>
+        <div class="student-box">
+            <i class="fas fa-user-graduate icon"></i>
+            <h3>Awab Khan</h3>
+            <p class="country">UK</p>
+            <p class="testimonial">RoeRide has been a lifesaver for me. I no longer have to worry about the high costs of commuting.</p>
+        </div>
+    </div>
+</section>
+<!-- Reviews section ends -->
+
+
+<!-- FAQ section starts -->
+<section class="faqs" id="faqs">
+    <h1 class="heading"><i class="fas fa-question-circle"></i> FAQs</h1>
+
+    <div class="container">
+        <div class="box">
+            <h3>What is RoeRide?</h3>
+            <p>RoeRide is a ride-sharing platform designed to facilitate transportation among students of Roehampton University.</p>
+        </div>
+
+        <div class="box">
+            <h3>How can I join RoeRide?</h3>
+            <p>To get started, simply sign up on our platform and start browsing available rides.</p>
+        </div>
+
+        <div class="box">
+            <h3>Is RoeRide safe?</h3>
+            <p>Yes, RoeRide ensures safety with user ratings and reviews, making your journey secure and reliable.</p>
+        </div>
+
+        <div class="box">
+            <h3>How much does it cost?</h3>
+            <p>RoeRide is affordable, with costs shared among passengers, making it cheaper than traditional commuting options.</p>
+        </div>
+
+        <div class="box">
+            <h3>Can I list my ride?</h3>
+            <p>Yes, you can list your ride and offer seats to other students traveling in the same direction.</p>
+        </div>
+
+        <div class="box">
+            <h3>What if I need to cancel a ride?</h3>
+            <p>You can cancel a ride at any time, but please inform your passengers as soon as possible.</p>
+        </div>
+    </div>
+</section>
+<!-- FAQ section ends -->
+
+
+<!-- Contact section starts -->
+<section class="contact" id="contact">
+    <div class="box-container">
+        <div class="box">
+            <h3>RoeRide</h3>
+            <p>Thank you for considering RoeRide. Connect with us to start your sustainable commuting journey.</p>
+        </div>
+        <div class="box">
+            <h3>Quick Links</h3>
+            <a href="#home"><i class="fas fa-chevron-circle-right"></i> Home</a>
+            <a href="#about"><i class="fas fa-chevron-circle-right"></i> About</a>
+            <a href="#features"><i class="fas fa-chevron-circle-right"></i> Features</a>
+            <a href="#reviews"><i class="fas fa-chevron-circle-right"></i> Reviews</a>
+            <a href="#faqs"><i class="fas fa-chevron-circle-right"></i> FAQs</a>
+        </div>
+        <div class="box">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-phone"></i> +44 1234 56789</p>
+            <p><i class="fas fa-envelope"></i> support@roeride.org</p>
+            <p><i class="fas fa-map-marked-alt"></i> London, UK</p>
+            <div class="share">
+                <a href="https://wa.me/roeride" class="fab fa-whatsapp" aria-label="WhatsApp" target="_blank"></a>
+                <a href="https://www.instagram.com/roeride_official/" class="fab fa-instagram" aria-label="Instagram" target="_blank"></a>
+                <a href="mailto:support@roeride.org" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+                <a href="https://x.com/RoeRide_Official" class="fab fa-twitter" aria-label="Twitter" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+    <h1 class="credit">Designed by RoeRide Team ❤️</h1>
+</section>
+<!-- footer section ends -->
+
+<!-- JavaScript and other scripts -->
+<script src="./assets/js/script.js"></script>
 </body>
 </html>

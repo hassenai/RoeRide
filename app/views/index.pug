@@ -1,24 +1,24 @@
-extends layout
+extends layout.pug
 
 block content
-    h1 University Rides
-
-    table(border="1")
-        thead
-            tr
-                th Ride ID
-                th Driver Name
-                th Available Seats
-                th Pickup Location
-                th Drop-off Location
-                th Departure Time
-        tbody
-            each ride in rides
-                tr
-                    td= ride.ride_id
-                    td
-                        a(href=`/driver/${ride.driver_id}`) #{ride.driver_name}
-                    td= ride.available_seats
-                    td= ride.pickup_location
-                    td= ride.dropoff_location
-                    td= ride.departure_time
+  section.home#home
+    div#particles-js
+    div.content
+      h2 Unlock Your Commute with 
+        span.highlight
+          u RoeRide
+      p Seamlessly connecting Roehampton University students for affordable and sustainable travel.
+      a.btn(href="/rides")
+        span Discover More
+        i.fas.fa-arrow-circle-down
+  section.about#about
+    h2.heading
+      i.fas.fa-info-circle
+      |  About 
+      span RoeRide
+    div.row
+      div.image
+        img(src="/images/students-commute.webp", alt="Students Commute", draggable="false", class="tilt")
+      div.content
+        h3 About RoeRide
+        p RoeRide is a ride-sharing platform designed to facilitate transportation among students of Roehampton University...
