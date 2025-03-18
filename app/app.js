@@ -1,147 +1,166 @@
 // Import express.js
 const express = require("express");
+const path = require("path");
+const db = require("./services/db");  // Import the database connection
 
 // Create express app
-var app = express();
+const app = express();
 
 // Add static files location
-app.use(express.static("static"));
+app.use(express.static("static"));  // Serve HTML, CSS, JS, images, etc.
 
-// Get the functions in the db.js file to use
-const db = require('./services/db');
-
-// Use the Pug templating engine
-app.set('view engine', 'pug');
-app.set('views', './app/views');
-
-// Create a route for root - /
-app.get("/", function(req, res) {
-    res.send("Hello world!");
+app.get("/", (req, res) => {
+    const filePath = path.join(__dirname, "..", "static", "test.html"); 
+    console.log(`Serving file from: ${filePath}`); 
+    res.sendFile(filePath); 
 });
 
-// Create a route for testing the db
-app.get("/roeride-form1", function(req, res) {
-    var sql = 'SELECT * FROM Drivers';
+// Route to fetch rides from the database
+app.get("/rides", async (req, res) => {
+    try {
+        const sql = `
+            SELECT id, destination, date, time, driver_name, seats_available, cost 
+            FROM rides
+            ORDER BY date, time;
+        `;
 
-    var output = '<table border="1px">';
-    output += '<tr><th>Driver ID</th><th>Name</th></tr>';
+        const rides = await db.query(sql);  // Fetch ride data
+        res.json(rides);  // Send JSON response
+    } catch (error) {
+        console.error("Database query failed:", error);
+        res.status(500).send("Error fetching rides.");
+    }
+});
 
-    db.query(sql).then(results => {
-        for (var row of results) {
-            output += '<tr>';
-            output += '<td>' + row.code + '</td>';
-            output += '<td><a href="./reoride-form1/' + row.code + '">' + row.name + '</a></td>';
-            output += '</tr>';
+
+// Route to serve the rides HTML file
+app.get("/rides-page", (req, res) => {
+    res.sendFile(path.join(__dirname, "static", "rides.html"));
+});
+
+// Route to test the DB with drivers
+app.get("/roeride-form1", async (req, res) => {
+    try {
+        const sql = "SELECT * FROM Drivers";
+        const [results] = await db.query(sql);
+
+        let output = '<table border="1px">';
+        output += '<tr><th>Driver ID</th><th>Name</th></tr>';
+
+        for (let row of results) {
+            output += `<tr>
+                        <td>${row.code}</td>
+                        <td><a href="./reoride-form1/${row.code}">${row.name}</a></td>
+                      </tr>`;
         }
-        output += '</table>';
+        output += "</table>";
         res.send(output);
-    }).catch(err => {
-        console.error(err);
+    } catch (error) {
+        console.error(error);
         res.send("Error fetching drivers list.");
-    });
+    }
 });
 
-
-app.get("/drivers", function(req, res) {
-    sql = 'SELECT * FROM Drivers';
-    db.query(sql).then(results => {
-        console.log(results);
+// Route to fetch all drivers (JSON output)
+app.get("/drivers", async (req, res) => {
+    try {
+        const sql = "SELECT * FROM Drivers";
+        const [results] = await db.query(sql);
         res.json(results);
-    });
+    } catch (error) {
+        console.error("Database query failed:", error);
+        res.status(500).send("Error fetching drivers.");
+    }
 });
 
-app.get("/roeride/:id", function(req, res) {
-    var rideId = req.params.id;
-    console.log(rideId);
+// Route to fetch ride details by ID
+app.get("/roeride/:id", async (req, res) => {
+    const rideId = req.params.id;
 
-    var rideSql = `
+    const rideSql = `
         SELECT r.id, d.name AS driver, b.name AS booking_type, u.name AS user, 
                r.start_location, r.end_location, r.ride_purpose
         FROM Rides r
         JOIN Drivers d ON r.driver_code = d.code
         JOIN Booking b ON r.booking_id = b.id
         JOIN Users u ON r.user_id = u.id
-        WHERE r.id = ?`;
+        WHERE r.id = ?
+    `;
 
-    db.query(rideSql, [rideId]).then(results => {
+    try {
+        const [results] = await db.query(rideSql, [rideId]);
+
         if (results.length === 0) {
-            res.send("No ride found with ID: " + rideId);
+            res.send(`No ride found with ID: ${rideId}`);
             return;
         }
 
-        var output = '';
-        output += '<div><b>Ride ID:</b> ' + results[0].id + '</div>';
-        output += '<div><b>Driver:</b> ' + results[0].driver + '</div>';
-        output += '<div><b>User:</b> ' + results[0].user + '</div>';
-        output += '<div><b>Booking Type:</b> ' + results[0].booking_type + '</div>';
-        output += '<div><b>Start Location:</b> ' + results[0].start_location + '</div>';
-        output += '<div><b>End Location:</b> ' + results[0].end_location + '</div>';
-        output += '<div><b>Ride Purpose:</b> ' + results[0].ride_purpose + '</div>';
+        let output = `
+            <div><b>Ride ID:</b> ${results[0].id}</div>
+            <div><b>Driver:</b> ${results[0].driver}</div>
+            <div><b>User:</b> ${results[0].user}</div>
+            <div><b>Booking Type:</b> ${results[0].booking_type}</div>
+            <div><b>Start Location:</b> ${results[0].start_location}</div>
+            <div><b>End Location:</b> ${results[0].end_location}</div>
+            <div><b>Ride Purpose:</b> ${results[0].ride_purpose}</div>
+        `;
 
         res.send(output);
-    }).catch(err => {
-        console.error(err);
-        res.send("Error fetching ride details.");
-    });
+    } catch (error) {
+        console.error("Error fetching ride details:", error);
+        res.status(500).send("Error fetching ride details.");
+    }
 });
 
-
-        app.get("/roeride", function(req, res) {
-            var sql = 'SELECT * FROM Rides';
-            var output = '<table border="1px">';
-            output += '<tr><th>Ride ID</th><th>Start Location</th><th>End Location</th><th>Ride Purpose</th><th>Booking Type</th></tr>';
-        
-            db.query(sql).then(results => {
-                for (var row of results) {
-                    output += '<tr>';
-                    output += '<td><a href="./roeride/' + row.id + '">' + row.id + '</a></td>';
-                    output += '<td>' + row.start_location + '</td>';
-                    output += '<td>' + row.end_location + '</td>';
-                    output += '<td>' + row.ride_purpose + '</td>';
-                    output += '<td>' + row.booking_id + '</td>';
-                    output += '</tr>';
-                }
-                output += '</table>';
-                res.send(output);
-            }).catch(error => {
-                res.status(500).send("Database query failed: " + error.message);
-            });
-        });
-        
-// Task 1: Provide JSON output for all students
-app.get("/students", async function(req, res) {
+// Route to fetch all rides (HTML table output)
+app.get("/roeride", async (req, res) => {
     try {
-        const students = await db.query("SELECT * FROM Students");
+        const sql = "SELECT * FROM Rides";
+        const [results] = await db.query(sql);
+
+        let output = '<table border="1px">';
+        output += '<tr><th>Ride ID</th><th>Start Location</th><th>End Location</th><th>Ride Purpose</th><th>Booking Type</th></tr>';
+
+        for (let row of results) {
+            output += `<tr>
+                        <td><a href="./roeride/${row.id}">${row.id}</a></td>
+                        <td>${row.start_location}</td>
+                        <td>${row.end_location}</td>
+                        <td>${row.ride_purpose}</td>
+                        <td>${row.booking_id}</td>
+                      </tr>`;
+        }
+        output += "</table>";
+        res.send(output);
+    } catch (error) {
+        console.error("Database query failed:", error);
+        res.status(500).send("Database query failed.");
+    }
+});
+
+// Route to fetch all students (JSON output)
+app.get("/students", async (req, res) => {
+    try {
+        const [students] = await db.query("SELECT * FROM Students");
         res.json(students);
     } catch (error) {
         console.error("Database query failed:", error);
-        res.status(500).send("Error fetching students data.");
+        res.status(500).send("Error fetching students.");
     }
 });
 
-// Task: Render the rides page using Pug (UPDATED)
-app.get("/rides", async function (req, res) {
-    try {
-        const rides = await db.query("SELECT * FROM uni_rides");
-        res.render("index", { rides }); // Send rides data to Pug template
-    } catch (error) {
-        console.error("Database query failed:", error);
-        res.status(500).send("Error fetching rides data.");
-    }
-});
-
-// Create a route for /goodbye
-app.get("/goodbye", function(req, res) {
+// Route for /goodbye
+app.get("/goodbye", (req, res) => {
     res.send("Goodbye world!");
 });
 
-// Create a dynamic route for /hello/<name>
-app.get("/hello/:name", function(req, res) {
-    console.log(req.params);
-    res.send("Hello " + req.params.name);
+// Route for /hello/<name>
+app.get("/hello/:name", (req, res) => {
+    res.send(`Hello ${req.params.name}`);
 });
 
 // Start server on port 3000
-app.listen(3000, function(){
-    console.log(`Server running at http://127.0.0.1:3000/`);
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server running at http://127.0.0.1:${PORT}/`);
 });

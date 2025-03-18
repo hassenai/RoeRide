@@ -123,6 +123,58 @@
     </div>
     <h1 class="credit">Designed by RoeRide Team ❤️</h1>
 </section>
+
+<section class="rides" id="rides">
+    <h2 class="heading"><i class="fas fa-car"></i> Available <span>Rides</span></h2>
+    <div id="rides-container" class="container">
+        <!-- Rides will be dynamically injected here -->
+    </div>
+</section>
+
+// Function to fetch rides from the server and display them
+async function fetchRides() {
+    const container = document.getElementById("rides-container");
+
+    try {
+        const response = await fetch("/rides");
+        if (!response.ok) {
+            throw new Error("Failed to fetch rides.");
+        }
+
+        const rides = await response.json();
+
+        // Clear existing rides
+        container.innerHTML = "";
+
+        // Loop through each ride and create HTML elements
+        rides.forEach(ride => {
+            const rideCard = document.createElement("div");
+            rideCard.classList.add("ride-box");
+
+            rideCard.innerHTML = `
+                <div class="ride-info">
+                    <h3>${ride.destination}</h3>
+                    <p><i class="fas fa-calendar-alt"></i> Date: ${ride.date}</p>
+                    <p><i class="fas fa-clock"></i> Time: ${ride.time}</p>
+                    <p><i class="fas fa-user"></i> Driver: ${ride.driver_name}</p>
+                    <p><i class="fas fa-car"></i> Seats Available: ${ride.seats_available}</p>
+                    <p><i class="fas fa-pound-sign"></i> Cost per Seat: £${ride.cost}</p>
+                </div>
+                <a href="#" class="btn">Book This Ride</a>
+            `;
+
+            container.appendChild(rideCard);
+        });
+
+    } catch (error) {
+        console.error("Error loading rides:", error);
+        container.innerHTML = `<p>Failed to load rides. Please try again later.</p>`;
+    }
+}
+
+// Call the function when the page loads
+document.addEventListener("DOMContentLoaded", fetchRides);
+
 <!-- Footer Section Ends -->
 
 </body>
