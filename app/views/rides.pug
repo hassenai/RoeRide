@@ -1,0 +1,29 @@
+extends layout.pug
+
+block content
+  section.rides#rides
+    h2.heading
+      i.fas.fa-car
+      |  Available 
+      span Rides
+    div.container
+      each ride in rides
+        div.ride-box
+          div.ride-info
+            h3= ride.destination
+            p
+              i.fas.fa-calendar-alt
+              |  Date: #{ride.date}
+            p
+              i.fas.fa-clock
+              |  Time: #{ride.time}
+            p
+              i.fas.fa-user
+              |  Driver: #{ride.driver_name}
+            p
+              i.fas.fa-car
+              |  Seats Available: #{ride.seats_available}
+            p
+              i.fas.fa-pound-sign
+              |  Cost per Seat: £#{ride.cost}
+          a.btn(href="#") Book This Ride
