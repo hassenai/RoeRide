@@ -124,6 +124,7 @@
     <h1 class="credit">Designed by RoeRide Team ❤️</h1>
 </section>
 
+<!-- Available Rides Section Starts -->
 <section class="rides" id="rides">
     <h2 class="heading"><i class="fas fa-car"></i> Available <span>Rides</span></h2>
     <div id="rides-container" class="container">
@@ -131,6 +132,7 @@
     </div>
 </section>
 
+<script>
 // Function to fetch rides from the server and display them
 async function fetchRides() {
     const container = document.getElementById("rides-container");
@@ -174,8 +176,9 @@ async function fetchRides() {
 
 // Call the function when the page loads
 document.addEventListener("DOMContentLoaded", fetchRides);
+</script>
+<!-- Available Rides Section Ends -->
 
-<!-- Footer Section Ends -->
 
 </body>
 </html>
