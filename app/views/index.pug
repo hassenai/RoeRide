@@ -1,24 +1,203 @@
-extends layout.pug
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  title RoeRide | Ride-Sharing for Roehampton University Students
+  meta(name='description', content='RoeRide - A ride-sharing platform for Roehampton University students, providing affordable and sustainable transportation.')
+  meta(name='keywords', content='RoeRide, ride-sharing, Roehampton University, student transportation, sustainable travel, carpooling, student commute')
+  // Open Graph Meta Tags for Social Sharing
+  meta(property='og:title', content='RoeRide | Ride-Sharing for Roehampton University Students')
+  meta(property='og:site_name', content='RoeRide')
+  meta(property='og:url', content='https://roeride.org')
+  meta(property='og:type', content='website')
+  meta(property='og:description', content='RoeRide - A ride-sharing platform for Roehampton University students, providing affordable and sustainable transportation.')
+  // Stylesheets
+  link(rel='stylesheet', href='style.css')
+  // Font Awesome Icons
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css', integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==', crossorigin='anonymous', referrerpolicy='no-referrer')
+  // Favicon
+  link(rel='shortcut icon', href='/images/logo-icon.png', type='image/x-png')
+  
+  
+// navbar starts
+header
+  div
+    img.logo-img(src='images/logo.png', alt='RoeRide Logo')
+  nav.navbar
+    ul
+      li
+        a.active(href='#home') Home
+      li
+        a(href='#about') About
+      li
+        a(href='#features') Features
+      li
+        a(href='#reviews') Reviews
+      li
+        a(href='#faqs') FAQs
+      li
+        a(href='#contact') Contact
+// navbar ends
+// Home section starts
+section#home.home
+  #particles-js
+  .content
+    h2
+      | Unlock Your Commute with 
+      span.highlight
+        u RoeRide
+    p
+      br
+      | Seamlessly connecting Roehampton University students for affordable and sustainable travel.
+    a.btn(href='#about')
+      span Discover More
+      i.fas.fa-arrow-circle-down
+  // Ride Preview Section
+  .ride-preview
+    img(src='images/rides.png', alt='A Ride Preview')
+    // Button to open the Ride link
+    .button-container
+    a.btn(href='/rides') View Available Rides
 
-block content
-  section.home#home
-    div#particles-js
-    div.content
-      h2 Unlock Your Commute with 
-        span.highlight
-          u RoeRide
-      p Seamlessly connecting Roehampton University students for affordable and sustainable travel.
-      a.btn(href="/rides")
-        span Discover More
-        i.fas.fa-arrow-circle-down
-  section.about#about
-    h2.heading
-      i.fas.fa-info-circle
-      |  About 
-      span RoeRide
-    div.row
-      div.image
-        img(src="/images/students-commute.webp", alt="Students Commute", draggable="false", class="tilt")
-      div.content
-        h3 About RoeRide
-        p RoeRide is a ride-sharing platform designed to facilitate transportation among students of Roehampton University...
+// Home section ends
+// about section starts
+section#about.about
+  h2.heading
+    i.fas.fa-info-circle
+    |  About 
+    span RoeRide
+  .row
+    .image
+      img.tilt(src='images/about.png', alt='image')
+    .content
+      h3 About RoeRide
+      p
+        | RoeRide is a ride-sharing platform designed to facilitate transportation among students of Roehampton University. Our goal is to provide an affordable, sustainable, and convenient way for students to commute to and from campus. By connecting users traveling in the same direction, RoeRide helps students save money, reduce traffic congestion, and lower their carbon footprint.
+        br
+        br
+        | We understand that commuting can be a hassle, especially for students. That&apos;s why we offer a seamless experience from finding a ride to reaching your destination. Our platform ensures safety and reliability with user ratings and reviews, making your journey stress-free.
+        br
+        br
+        | Join us in making commuting easier, cheaper, and greener for everyone at Roehampton University.
+// about section ends
+// Features section starts
+section#features.features
+  h2.heading
+    i.fas.fa-concierge-bell
+    |  Our 
+    span Features
+  .container
+    .box
+      h3 User Ratings and Reviews
+      p Ensure a safe and trustworthy experience with our user rating and review system.
+    .box
+      h3 Easy-to-Use Interface
+      p Our platform offers a seamless user experience for all students.
+    .box
+      h3 Available Rides
+      p Find a list of available rides and students to pick up with ease.
+  .cta
+    a.btn(href='https://wa.me/roeride') Contact Us
+// Features section ends
+// Reviews section starts
+section#reviews.reviews
+  h1.heading
+    i.fas.fa-graduation-cap
+    |  Student 
+    span Reviews
+  .container
+    .student-box
+      i.fas.fa-user-graduate.icon
+      h3 Ahmed Ali
+      p.country UK
+      p.testimonial
+        | RoeRide made my daily commute to campus so much easier and affordable. Highly recommend it to all students!
+    .student-box
+      i.fas.fa-user-graduate.icon
+      h3 Sara Ahmed
+      p.country UK
+      p.testimonial
+        | I love how convenient and eco-friendly RoeRide is. It&apos;s a great way to meet new people too!
+    .student-box
+      i.fas.fa-user-graduate.icon
+      h3 Awab Khan
+      p.country UK
+      p.testimonial
+        | RoeRide has been a lifesaver for me. I no longer have to worry about the high costs of commuting.
+// Reviews section ends
+// FAQ section starts
+section#faqs.faqs
+  h1.heading
+    i.fas.fa-question-circle
+    |  FAQs
+  .container
+    .box
+      h3 What is RoeRide?
+      p
+        | RoeRide is a ride-sharing platform designed to facilitate transportation among students of Roehampton University.
+    .box
+      h3 How can I join RoeRide?
+      p
+        | To get started, simply sign up on our platform and start browsing available rides.
+    .box
+      h3 Is RoeRide safe?
+      p
+        | Yes, RoeRide ensures safety with user ratings and reviews, making your journey secure and reliable.
+    .box
+      h3 How much does it cost?
+      p
+        | RoeRide is affordable, with costs shared among passengers, making it cheaper than traditional commuting options.
+    .box
+      h3 Can I list my ride?
+      p
+        | Yes, you can list your ride and offer seats to other students traveling in the same direction.
+    .box
+      h3 What if I need to cancel a ride?
+      p
+        | You can cancel a ride at any time, but please inform your passengers as soon as possible.
+// FAQ section ends
+// Contact section starts
+section#contact.contact
+  .box-container
+    .box
+      h3 RoeRide
+      p
+        | Thank you for considering RoeRide. Connect with us to start your sustainable commuting journey.
+    .box
+      h3 Quick Links
+      a(href='#home')
+        i.fas.fa-chevron-circle-right
+        |  Home
+      a(href='#about')
+        i.fas.fa-chevron-circle-right
+        |  About
+      a(href='#features')
+        i.fas.fa-chevron-circle-right
+        |  Features
+      a(href='#reviews')
+        i.fas.fa-chevron-circle-right
+        |  Reviews
+      a(href='#faqs')
+        i.fas.fa-chevron-circle-right
+        |  FAQs
+    .box
+      h3 Contact Info
+      p
+        i.fas.fa-phone
+        |  +44 1234 56789
+      p
+        i.fas.fa-envelope
+        |  support@roeride.org
+      p
+        i.fas.fa-map-marked-alt
+        |  London, UK
+      .share
+        a.fab.fa-whatsapp(href='https://wa.me/roeride', aria-label='WhatsApp', target='_blank')
+        a.fab.fa-instagram(href='https://www.instagram.com/roeride_official/', aria-label='Instagram', target='_blank')
+        a.fas.fa-envelope(href='mailto:support@roeride.org', aria-label='Mail', target='_blank')
+        a.fab.fa-twitter(href='https://x.com/RoeRide_Official', aria-label='Twitter', target='_blank')
+  h1.credit Designed by RoeRide Team &#x2764;&#xFE0F;
+// footer section ends
+// JavaScript and other scripts
+script(src='./assets/js/script.js')

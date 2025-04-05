@@ -2,12 +2,78 @@ doctype html
 html(lang="en")
   head
     meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title RoeRide | #{title}
-    link(rel="stylesheet", href="/css/style.css")
+    title RoeRide | Ride-Sharing for Roehampton University Students
+
+    // Dynamic meta tags
+    block meta
+
+    // Stylesheets
+    link(rel="stylesheet", href="/style.css")
+    
+    // Font Awesome
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css", integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==", crossorigin="anonymous", referrerpolicy="no-referrer")
+    
+    // Favicon
+    link(rel="shortcut icon", href="/images/logo-icon.png", type="image/x-png")
+
   body
+    // Navbar
     header
-      h1 Welcome to RoeRide
+      div
+        img.logo-img(src="/images/logo.png", alt="RoeRide Logo")
+      nav.navbar
+        ul
+          li
+            a(href="/", class=activePage == 'home' ? 'active' : '') Home
+          li
+            a(href="/#about") About
+          li
+            a(href="/#features") Features
+          li
+            a(href="/#reviews") Reviews
+          li
+            a(href="/#faqs") FAQs
+          li
+            a(href="/#contact") Contact
+
+    // Main content from child template
     block content
-    footer
-      p &copy; 2023 RoeRide
+
+    // Footer
+    section#contact.contact
+      .box-container
+        .box
+          h3 RoeRide
+          p Thank you for choosing RoeRide. Connect with us to start your sustainable commuting journey.
+        .box
+          h3 Quick Links
+          a(href="/") 
+            i.fas.fa-chevron-circle-right Home
+          a(href="/#about") 
+            i.fas.fa-chevron-circle-right About
+          a(href="/#features") 
+            i.fas.fa-chevron-circle-right Features
+          a(href="/#reviews") 
+            i.fas.fa-chevron-circle-right Reviews
+          a(href="/#faqs") 
+            i.fas.fa-chevron-circle-right FAQs
+        .box
+          h3 Contact Info
+          p 
+            i.fas.fa-phone +44 1234 56789
+          p 
+            i.fas.fa-envelope support@roeride.org
+          p 
+            i.fas.fa-map-marked-alt London, UK
+          .share
+            a.fab.fa-whatsapp(href="https://wa.me/447847135476", target="_blank", aria-label="WhatsApp")
+            a.fab.fa-instagram(href="https://www.instagram.com/roeride_official/", target="_blank", aria-label="Instagram")
+            a.fas.fa-envelope(href="mailto:support@roeride.org", target="_blank", aria-label="Mail")
+            a.fab.fa-twitter(href="https://x.com/RoeRide_Official", target="_blank", aria-label="Twitter")
+      h1.credit Designed by RoeRide Team ❤️
+
+    // Scripts
+    script(src="/assets/js/script.js")
+    block scripts

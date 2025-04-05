@@ -1,100 +1,148 @@
 doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title RoeRide | Available Rides
-    meta(name="description", content="RoeRide - Find available rides for Roehampton University students.")
-    meta(name="keywords", content="RoeRide, ride-sharing, Roehampton University, available rides, student transportation, sustainable travel, carpooling, student commute")
-    meta(property="og:title", content="RoeRide | Available Rides")
-    meta(property="og:site_name", content="RoeRide")
-    meta(property="og:url", content="https://roeride.org/rides")
-    meta(property="og:type", content="website")
-    meta(property="og:description", content="RoeRide - Find available rides for Roehampton University students.")
-    link(rel="stylesheet", href="/css/style.css")
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
-    link(rel="shortcut icon", href="/images/logo-icon.png", type="image/x-png")
-  body(oncontextmenu="return false")
-    header
-      div
-        img(src="/images/roeride.png", alt="RoeRide Logo", class="logo-img")
-      nav.navbar
-        ul
-          li
-            a(href="/") Home
-          li
-            a(href="/#about") About
-          li
-            a(href="/#features") Features
-          li
-            a(href="/#reviews") Reviews
-          li
-            a(href="/#faqs") FAQs
-          li
-            a(href="/#contact") Contact
-    section.rides#rides
-      h2.heading
-        i.fas.fa-car
-        |  Available 
-        span Rides
-      div.container
-        each ride in rides
-          div.ride-box
-            div.ride-info
-              h3= ride.destination
-              p
-                i.fas.fa-calendar-alt
-                |  Date: #{ride.date.toISOString().split('T')[0]}
-              p
-                i.fas.fa-clock
-                |  Time: #{ride.time}
-              p
-                i.fas.fa-user
-                |  Driver: #{ride.driver_name}
-              p
-                i.fas.fa-car
-                |  Seats Available: #{ride.seats_available}
-              p
-                i.fas.fa-pound-sign
-                |  Cost per Seat: £#{ride.cost}
-            a.btn(href="#") Book This Ride
-    section.contact#contact
-      div.box-container
-        div.box
-          h3 RoeRide
-          p Thank you for choosing RoeRide. Connect with us to start your sustainable commuting journey.
-        div.box
-          h3 Quick Links
-          a(href="/")
-            i.fas.fa-chevron-circle-right
-            |  Home
-          a(href="/#about")
-            i.fas.fa-chevron-circle-right
-            |  About
-          a(href="/#features")
-            i.fas.fa-chevron-circle-right
-            |  Features
-          a(href="/#reviews")
-            i.fas.fa-chevron-circle-right
-            |  Reviews
-          a(href="/#faqs")
-            i.fas.fa-chevron-circle-right
-            |  FAQs
-        div.box
-          h3 Contact Info
-          p
-            i.fas.fa-phone
-            |  +44 1234 56789
-          p
-            i.fas.fa-envelope
-            |  support@roeride.org
-          p
-            i.fas.fa-map-marked-alt
-            |  London, UK
-          div.share
-            a(href="https://wa.me/447847135476", class="fab fa-whatsapp", aria-label="WhatsApp", target="_blank")
-            a(href="https://www.instagram.com/roeride_official/", class="fab fa-instagram", aria-label="Instagram", target="_blank")
-            a(href="mailto:support@roeride.org", class="fas fa-envelope", aria-label="Mail", target="_blank")
-            a(href="https://x.com/RoeRide_Official", class="fab fa-twitter", aria-label="Twitter", target="_blank")
-      h1.credit Designed by RoeRide Team ❤️
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  title RoeRide | Available Rides
+  meta(name='description', content='RoeRide - Find available rides for Roehampton University students.')
+  meta(name='keywords', content='RoeRide, ride-sharing, Roehampton University, available rides, student transportation, sustainable travel, carpooling, student commute')
+  // Open Graph Meta Tags for Social Sharing
+  meta(property='og:title', content='RoeRide | Available Rides')
+  meta(property='og:site_name', content='RoeRide')
+  meta(property='og:url', content='https://roeride.org/rides')
+  meta(property='og:type', content='website')
+  meta(property='og:description', content='RoeRide - Find available rides for Roehampton University students.')
+  // Stylesheets
+  link(rel='stylesheet', href='style.css')
+  // Font Awesome Icons
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css', integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==', crossorigin='anonymous', referrerpolicy='no-referrer')
+  // Favicon
+  link(rel='shortcut icon', href='images/logo-icon.png', type='image/x-png')
+// navbar starts
+header
+  div
+    img.logo-img(src='images/logo.png', alt='RoeRide Logo')
+  nav.navbar
+    ul
+      li
+        a(href='/') Home
+      li
+        a(href='/#about') About
+      li
+        a(href='/#features') Features
+      li
+        a(href='/#reviews') Reviews
+      li
+        a(href='/#faqs') FAQs
+      li
+        a(href='/#contact') Contact
+// navbar ends
+// Available Rides Section Starts
+section#rides.rides
+  h2.heading
+    i.fas.fa-car
+    |  Available 
+    span Rides
+  .container
+    // Ride 1
+    .ride-box
+      .ride-info
+        h3 From Roehampton to Central London
+        p
+          i.fas.fa-calendar-alt
+          |  Date: 25th October 2023
+        p
+          i.fas.fa-clock
+          |  Time: 8:00 AM
+        p
+          i.fas.fa-user
+          |  Driver: Saeed Mohammed
+        p
+          i.fas.fa-car
+          |  Seats Available: 3
+        p
+          i.fas.fa-pound-sign
+          |  Cost per Seat: &pound;5
+      a.btn(href='#') Book This Ride
+    // Ride 2
+    .ride-box
+      .ride-info
+        h3 From Roehampton to Heathrow Airport
+        p
+          i.fas.fa-calendar-alt
+          |  Date: 26th October 2023
+        p
+          i.fas.fa-clock
+          |  Time: 10:00 AM
+        p
+          i.fas.fa-user
+          |  Driver: Jane Smith
+        p
+          i.fas.fa-car
+          |  Seats Available: 2
+        p
+          i.fas.fa-pound-sign
+          |  Cost per Seat: &pound;7
+      a.btn(href='#') Book This Ride
+    // Ride 3
+    .ride-box
+      .ride-info
+        h3 From Roehampton to Kingston University
+        p
+          i.fas.fa-calendar-alt
+          |  Date: 27th October 2023
+        p
+          i.fas.fa-clock
+          |  Time: 9:30 AM
+        p
+          i.fas.fa-user
+          |  Driver: Ahmed Khan
+        p
+          i.fas.fa-car
+          |  Seats Available: 4
+        p
+          i.fas.fa-pound-sign
+          |  Cost per Seat: &pound;4
+      a.btn(href='#') Book This Ride
+// Available Rides Section Ends
+// Footer Section Starts
+section#contact.contact
+  .box-container
+    .box
+      h3 RoeRide
+      p
+        | Thank you for choosing RoeRide. Connect with us to start your sustainable commuting journey.
+    .box
+      h3 Quick Links
+      a(href='/')
+        i.fas.fa-chevron-circle-right
+        |  Home
+      a(href='/#about')
+        i.fas.fa-chevron-circle-right
+        |  About
+      a(href='/#features')
+        i.fas.fa-chevron-circle-right
+        |  Features
+      a(href='/#reviews')
+        i.fas.fa-chevron-circle-right
+        |  Reviews
+      a(href='/#faqs')
+        i.fas.fa-chevron-circle-right
+        |  FAQs
+    .box
+      h3 Contact Info
+      p
+        i.fas.fa-phone
+        |  +44 1234 56789
+      p
+        i.fas.fa-envelope
+        |  support@roeride.org
+      p
+        i.fas.fa-map-marked-alt
+        |  London, UK
+      .share
+        a.fab.fa-whatsapp(href='https://wa.me/447847135476', aria-label='WhatsApp', target='_blank')
+        a.fab.fa-instagram(href='https://www.instagram.com/roeride_official/', aria-label='Instagram', target='_blank')
+        a.fas.fa-envelope(href='mailto:support@roeride.org', aria-label='Mail', target='_blank')
+        a.fab.fa-twitter(href='https://x.com/RoeRide_Official', aria-label='Twitter', target='_blank')
+  h1.credit Designed by RoeRide Team &#x2764;&#xFE0F;
