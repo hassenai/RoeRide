@@ -18,14 +18,10 @@ app.get("/", (req, res) => {
 // Route to fetch rides from the database
 app.get("/rides", async (req, res) => {
     try {
-        const sql = `
-            SELECT id, destination, date, time, driver_name, seats_available, cost 
-            FROM rides
-            ORDER BY date, time;
-        `;
+        const sql = 'SELECT * from uni_rides';
 
-        const rides = await db.query(sql);  // Fetch ride data
-        res.json(rides);  // Send JSON response
+         const rides = await db.query(sql);  // Fetch ride data
+        res.render(rides, {data: rides}); 
     } catch (error) {
         console.error("Database query failed:", error);
         res.status(500).send("Error fetching rides.");
