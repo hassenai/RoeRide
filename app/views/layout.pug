@@ -1,50 +1,58 @@
 doctype html
 html(lang='en')
   head
-    meta(charset='UTF-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title RoeRide | Ride-Sharing for Roehampton University Students
 
-    // Open Graph Meta Tags
-    meta(property='og:title', content='RoeRide | Ride-Sharing for Roehampton University Students')
-    meta(property='og:site_name', content='RoeRide')
-    meta(property='og:url', content='https://roeride.org')
-    meta(property='og:type', content='website')
-    meta(property='og:description', content='RoeRide - A ride-sharing platform for Roehampton University students.')
+    // Meta tags for SEO and social sharing
+    meta(property="og:title", content="RoeRide | Ride-Sharing for Roehampton University Students")
+    meta(property="og:site_name", content="RoeRide")
+    meta(property="og:url", content="https://roeride.org")
+    meta(property="og:type", content="website")
+    meta(property="og:description", content="RoeRide - A ride-sharing platform for Roehampton University students.")
 
     // Stylesheets
-    link(rel='stylesheet', href='/style.css')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css', crossorigin='anonymous', referrerpolicy='no-referrer')
-    link(rel='shortcut icon', href='/images/logo-icon.png', type='image/x-png')
-  
-  body(oncontextmenu='return false')
+    link(rel="stylesheet", href="/style.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css", crossorigin="anonymous", referrerpolicy="no-referrer")
+
+    // Favicon
+    link(rel="shortcut icon", href="/images/logo-icon.png", type="image/x-png")
+
+    // Optional dynamic meta injection
+    block meta
+
+  body(oncontextmenu="return false")
+    // Navbar
     header
       div
-        img.logo-img(src='/images/roeride.png', alt='RoeRide Logo')
+        img.logo-img(src="/images/logo.png", alt="RoeRide Logo")
       nav.navbar
         ul
-          li: a(href='/') Home
-          li: a(href='/#about') About
-          li: a(href='/#features') Features
-          li: a(href='/#reviews') Reviews
-          li: a(href='/#faqs') FAQs
-          li: a(href='/#contact') Contact
+          li: a(href="/", class=activePage == 'home' ? 'active' : '') Home
+          li: a(href="/#about") About
+          li: a(href="/#features") Features
+          li: a(href="/#reviews") Reviews
+          li: a(href="/#faqs") FAQs
+          li: a(href="/#contact") Contact
 
+    // Main content
     block content
 
-    footer.contact#contact
+    // Footer
+    section#contact.contact
       .box-container
         .box
           h3 RoeRide
           p Thank you for choosing RoeRide. Connect with us to start your sustainable commuting journey.
         .box
           h3 Quick Links
-          a(href='/') Home
-          a(href='/#about') About
-          a(href='/#features') Features
-          a(href='/#reviews') Reviews
-          a(href='/#faqs') FAQs
+          a(href="/"): i.fas.fa-chevron-circle-right Home
+          a(href="/#about"): i.fas.fa-chevron-circle-right About
+          a(href="/#features"): i.fas.fa-chevron-circle-right Features
+          a(href="/#reviews"): i.fas.fa-chevron-circle-right Reviews
+          a(href="/#faqs"): i.fas.fa-chevron-circle-right FAQs
         .box
           h3 Contact Info
           p
@@ -57,10 +65,12 @@ html(lang='en')
             i.fas.fa-map-marked-alt
             | London, UK
           .share
-            a(href='https://wa.me/447847135476', class='fab fa-whatsapp', aria-label='WhatsApp', target='_blank')
-            a(href='https://www.instagram.com/roeride_official/', class='fab fa-instagram', aria-label='Instagram', target='_blank')
-            a(href='mailto:support@roeride.org', class='fas fa-envelope', aria-label='Mail', target='_blank')
-            a(href='https://x.com/RoeRide_Official', class='fab fa-twitter', aria-label='Twitter', target='_blank')
+            a.fab.fa-whatsapp(href="https://wa.me/447847135476", target="_blank", aria-label="WhatsApp")
+            a.fab.fa-instagram(href="https://www.instagram.com/roeride_official/", target="_blank", aria-label="Instagram")
+            a.fas.fa-envelope(href="mailto:support@roeride.org", target="_blank", aria-label="Mail")
+            a.fab.fa-twitter(href="https://x.com/RoeRide_Official", target="_blank", aria-label="Twitter")
       h1.credit Designed by RoeRide Team ❤️
 
-    script(src='/assets/js/script.js')
+    // JavaScript and additional scripts
+    script(src="/assets/js/script.js")
+    block scripts
