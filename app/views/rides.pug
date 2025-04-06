@@ -105,6 +105,31 @@ section#rides.rides
           |  Cost per Seat: &pound;4
       a.btn(href='#') Book This Ride
 // Available Rides Section Ends
+
+// Add Ride Form
+h2 Add a New Ride
+form(method='POST', action='/rides/add', class='ride-form')
+  div.form-group
+    label(for='start_location') Start Location
+    input(type='text', name='start_location', id='start_location', placeholder='Enter Start Location', required)
+  div.form-group
+    label(for='end_location') End Location
+    input(type='text', name='end_location', id='end_location', placeholder='Enter End Location', required)
+  div.form-group
+    label(for='ride_date') Ride Date
+    input(type='date', name='ride_date', id='ride_date', required)
+  div.form-group
+    label(for='ride_time') Ride Time
+    input(type='time', name='ride_time', id='ride_time', required)
+  div.form-group
+    label(for='seats_available') Seats Available
+    input(type='number', name='seats_available', id='seats_available', placeholder='Enter number of seats', required)
+  div.form-group
+    label(for='cost_per_seat') Cost per Seat (£)
+    input(type='number', step='0.01', name='cost_per_seat', id='cost_per_seat', placeholder='Enter cost per seat', required)
+  button(type='submit', class='submit-btn') Add Ride
+// Add Ride Form Ends
+
 // Footer Section Starts
 section#contact.contact
   .box-container
