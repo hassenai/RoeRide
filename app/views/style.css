@@ -1072,7 +1072,7 @@ input {
 }
 
 input:focus {
-  border-color: #4CAF50;
+  border-color: #1ED9C6;
   outline: none;
 }
 
@@ -1081,7 +1081,7 @@ input:focus {
   width: 100%;
   padding: 12px;
   font-size: 1.1rem;
-  background-color: #4CAF50;
+  background-color: #1ED9C6;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -1090,7 +1090,7 @@ input:focus {
 }
 
 .submit-btn:hover {
-  background-color: #45a049;
+  background-color: #1ED9C6;
 }
 
 /* scroll top ends */

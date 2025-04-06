@@ -31,9 +31,8 @@ app.get("/rides", async (req, res) => {
         
         // Format the date and time before passing to Pug
         rides.forEach(ride => {
-            const rideDate = new Date(ride.ride_date); // Assuming ride_date is stored in the DB
-            
-            // Format date to something user-friendly like 'Mon Apr 07, 2025'
+            // Format date
+            const rideDate = new Date(ride.ride_date);
             ride.ride_date = rideDate.toLocaleDateString('en-GB', {
                 weekday: 'short',
                 year: 'numeric',
@@ -41,11 +40,8 @@ app.get("/rides", async (req, res) => {
                 day: 'numeric'
             });
             
-            // Format time to 24-hour format or any desired format
-            ride.ride_time = rideDate.toLocaleTimeString('en-GB', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+            const timeParts = ride.ride_time.split(':');
+            ride.ride_time = `${timeParts[0]}:${timeParts[1]}`; // Just show hours and minutes
         });
 
         res.render("rides", { rides });
