@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  .profile-container
+    .profile-header
+      h1
+        i.fas.fa-user-circle
+        |  Welcome, #{user.name}!
+
+    .profile-actions
+      a.btn(href='/rides') ← Back to Rides
+      a.btn.btn-logout(href='/logout') Logout
+
+    .profile-info.card
+      h2 User Information
+      ul
+        li
+          strong Email:
+          |  #{user.email}
+        li
+          strong Phone:
+          |  #{user.phone ? user.phone : "Not provided"}
+
+    .bookings-section
+      h2
+        i.fas.fa-ticket-alt
+        |  Your Bookings
+
+      if bookings.length
+        .booking-cards
+          each booking in bookings
+            .booking-card.card
+              .card-body
+                h3 
+                  | #{booking.start_location} → #{booking.end_location}
+                  .ride-details
+                    p Date: #{booking.ride_date}
+                    p Time: #{booking.ride_time}
+                    p Seats Booked: #{booking.seats_booked}
+                    p Cost: £#{booking.cost_per_seat}
+                    .btn.btn-primary(href=`/ride/${booking.id}`) View Details
+      else
+        p.text-muted You haven't made any bookings yet.

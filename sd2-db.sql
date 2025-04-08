@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 13, 2025 at 02:15 PM
+-- Generation Time: Apr 08, 2025 at 08:44 AM
 -- Server version: 9.2.0
 -- PHP Version: 8.2.27
 
@@ -18,55 +18,33 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `RoeRide`
+-- Database: `sd2-db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Booking`
+-- Table structure for table `Bookings`
 --
 
-CREATE TABLE `Booking` (
-  `id` varchar(10) NOT NULL,
-  `name` varchar(50) NOT NULL
+CREATE TABLE `Bookings` (
+  `id` varchar(255) NOT NULL,
+  `ride_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `seats_booked` int NOT NULL,
+  `booking_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('pending','confirmed','cancelled') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `Booking`
+-- Dumping data for table `Bookings`
 --
 
-INSERT INTO `Booking` (`id`, `name`) VALUES
-('BKG001', 'Single Ride'),
-('BKG002', 'Round Trip'),
-('BKG003', 'Monthly Pass'),
-('BKG004', 'VIP Service');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Drivers`
---
-
-CREATE TABLE `Drivers` (
-  `code` varchar(10) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `Drivers`
---
-
-INSERT INTO `Drivers` (`code`, `name`) VALUES
-('DRV001', 'Ali Khan'),
-('DRV002', 'John Smith'),
-('DRV003', 'Emily Davis'),
-('DRV004', 'Michael Brown'),
-('DRV005', 'Sophia Patel'),
-('DRV006', 'Omar Hassan'),
-('DRV007', 'Aisha Rahman'),
-('DRV008', 'James Lee'),
-('DRV009', 'Emma Wilson');
+INSERT INTO `Bookings` (`id`, `ride_id`, `user_id`, `seats_booked`, `booking_date`, `status`) VALUES
+('BKG1750', 1, 1, 1, '2025-04-08 08:30:59', 'pending'),
+('BKG2895', 2, 1, 1, '2025-04-08 08:33:41', 'pending'),
+('BKG5746', 2, 1, 2, '2025-04-08 08:35:22', 'pending'),
+('BKG8801', 1, 1, 1, '2025-04-08 08:33:24', 'pending');
 
 -- --------------------------------------------------------
 
@@ -75,24 +53,25 @@ INSERT INTO `Drivers` (`code`, `name`) VALUES
 --
 
 CREATE TABLE `Rides` (
-  `id` varchar(8) NOT NULL,
-  `booking_id` varchar(10) DEFAULT NULL,
-  `driver_code` varchar(10) DEFAULT NULL,
-  `user_id` varchar(10) DEFAULT NULL,
-  `start_location` varchar(50) DEFAULT NULL,
-  `end_location` varchar(50) DEFAULT NULL,
-  `ride_purpose` varchar(50) DEFAULT NULL
+  `id` int NOT NULL,
+  `start_location` varchar(255) DEFAULT NULL,
+  `end_location` varchar(255) DEFAULT NULL,
+  `ride_date` date DEFAULT NULL,
+  `ride_time` time DEFAULT NULL,
+  `seats_available` int DEFAULT NULL,
+  `cost_per_seat` decimal(5,2) DEFAULT NULL,
+  `driver_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `Rides`
 --
 
-INSERT INTO `Rides` (`id`, `booking_id`, `driver_code`, `user_id`, `start_location`, `end_location`, `ride_purpose`) VALUES
-('RID001', 'BKG002', 'DRV002', 'USR005', 'Subway Station', 'City Center', 'Business Trip'),
-('RID002', 'BKG004', 'DRV005', 'USR006', 'Hotel Lobby', 'Grand Theatre', 'Leisure Travel'),
-('RID003', 'BKG001', 'DRV007', 'USR003', 'Residential Area', 'Shopping Mall', 'Grocery Shopping'),
-('RID004', 'BKG003', 'DRV009', 'USR001', 'Train Terminal', 'Business District', 'Work Commute');
+INSERT INTO `Rides` (`id`, `start_location`, `end_location`, `ride_date`, `ride_time`, `seats_available`, `cost_per_seat`, `driver_name`) VALUES
+(1, 'Roehampton University', 'Baker Street, London', '2025-04-15', '08:30:00', 1, 12.50, 'John Doe'),
+(2, 'Borough Market, London', 'Roehampton University', '2025-04-16', '14:00:00', 1, 15.00, 'Sarah Smith'),
+(3, 'Victoria Station, London', 'Roehampton University', '2025-04-17', '18:15:00', 2, 10.00, 'David Green'),
+(4, 'Roehampton university', 'Putney bridge', '2025-04-10', '14:36:00', 4, 3.00, 'Saeed uthman');
 
 -- --------------------------------------------------------
 
@@ -101,64 +80,71 @@ INSERT INTO `Rides` (`id`, `booking_id`, `driver_code`, `user_id`, `start_locati
 --
 
 CREATE TABLE `Users` (
-  `id` varchar(10) NOT NULL,
-  `name` varchar(50) NOT NULL
+  `id` int NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `Users`
 --
 
-INSERT INTO `Users` (`id`, `name`) VALUES
-('USR001', 'David Parker'),
-('USR002', 'Sarah Connor'),
-('USR003', 'Robert Johnson'),
-('USR004', 'Linda Nguyen'),
-('USR005', 'Carlos Mendes'),
-('USR006', 'Hina Malik');
+INSERT INTO `Users` (`id`, `email`, `password`, `phone`, `name`) VALUES
+(1, 'hasen6422@gmail.com', '$2b$10$/d0V2AqzhvANRRHw4LEqxOGXPofBDnR83dc3gmU6Q5krgZ60jFBMK', '', 'Hassen Jemal');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `Booking`
+-- Indexes for table `Bookings`
 --
-ALTER TABLE `Booking`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Drivers`
---
-ALTER TABLE `Drivers`
-  ADD PRIMARY KEY (`code`);
+ALTER TABLE `Bookings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ride_id` (`ride_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `Rides`
 --
 ALTER TABLE `Rides`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `booking_id` (`booking_id`),
-  ADD KEY `driver_code` (`driver_code`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Users`
 --
 ALTER TABLE `Users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Rides`
+--
+ALTER TABLE `Rides`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `Users`
+--
+ALTER TABLE `Users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `Rides`
+-- Constraints for table `Bookings`
 --
-ALTER TABLE `Rides`
-  ADD CONSTRAINT `rides_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `Booking` (`id`),
-  ADD CONSTRAINT `rides_ibfk_2` FOREIGN KEY (`driver_code`) REFERENCES `Drivers` (`code`),
-  ADD CONSTRAINT `rides_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
+ALTER TABLE `Bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`ride_id`) REFERENCES `Rides` (`id`),
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

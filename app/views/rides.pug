@@ -1,6 +1,11 @@
 extends layout
 
 block content
+  if user
+  .top-right-nav
+    a.btn(href='/profile') My Profile
+    a.btn.btn-logout(href='/logout') Logout
+
   section#rides.rides
     h2.heading
       i.fas.fa-car
@@ -27,9 +32,18 @@ block content
               p
                 i.fas.fa-pound-sign
                 |  Cost per Seat: £#{ride.cost_per_seat}
-            a.btn(href='#') Book This Ride
+            
+            // Booking Button Section
+            if user
+              form(method='POST', action='/rides/book', style='display: inline;')
+                input(type='hidden', name='rideId', value=ride.id)
+                input(type='number', name='seats', min='1', max=ride.seats_available, value='1', style='width: 50px;')
+                button.btn(type='submit') Book Now
+            else
+              a.btn(href='/login') Login to Book
       else
         p No rides available at the moment.
+
 
   // Add Ride Form
   h2.heading
@@ -60,3 +74,59 @@ block content
       label(for='driver_name') Driver Name
       input(type='text', name='driver_name', id='driver_name', placeholder='Enter Driver Name', required)
     button(type='submit', class='submit-btn') Add Ride
+
+  // Login/Register Modal
+  h2.heading
+    i.fas.fa-info-circle
+    |  Log in to  
+    span Ride
+  if !user
+    .auth-modal
+      .auth-tabs
+        button.tab-btn.active(data-tab='login') Login
+        button.tab-btn(data-tab='register') Register
+      
+      #login.tab-content.active
+        form(method='POST' action='/login')
+          .form-group
+            label(for='email') Email
+            input(type='email' name='email' required)
+          .form-group
+            label(for='password') Password
+            input(type='password' name='password' required)
+          button.btn(type='submit') Login
+      
+      #register.tab-content
+        form(method='POST' action='/register')
+          .form-group
+            label(for='name') Full Name
+            input(type='text' name='name' required)
+          .form-group
+            label(for='email') Email
+            input(type='email' name='email' required)
+          .form-group
+            label(for='password') Password
+            input(type='password' name='password' required)
+          .form-group
+            label(for='phone') Phone
+            input(type='tel' name='phone')
+          button.btn(type='submit') Register
+
+block scripts
+  script.
+    document.querySelectorAll('.tab-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+
+        // Toggle active button
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        // Toggle tab content
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+
+        document.getElementById(tab).classList.add('active');
+      });
+    });
